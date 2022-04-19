@@ -32,6 +32,11 @@ class Student:
             avg += mean(v)
         return round(avg / len(self.grades), 3)
 
+    def __lt__(self, other):
+        if not isinstance(other, Student):
+            return
+        return self.avg_grades() < other.avg_grades()
+
     def __str__(self):
         text = f"""Имя: {self.name}
 Фамилия: {self.surname}
@@ -58,6 +63,11 @@ class Lecturer(Mentor):
         for k, v in self.grades.items():
             avg += mean(v)
         return round(avg / len(self.grades), 3)
+
+    def __lt__(self, other):
+        if not isinstance(other, Lecturer):
+            return
+        return self.avg_grades() < other.avg_grades()
 
     def __str__(self):
         text = f"""Имя: {self.name}
@@ -117,7 +127,7 @@ dima.rate_hw(denis, "Python", 6)
 
 print(dima)
 print(anton)
-print(kirill)
+print(denis)
 
-print(kirill.avg_grades() < denis.avg_grades())
-print(anton.avg_grades() < victor.avg_grades())
+print(denis > kirill)
+print(anton < victor)
